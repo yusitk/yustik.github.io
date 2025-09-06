@@ -11,20 +11,24 @@
 </head>
 <body>
   <h1>Авторизация Portals</h1>
-  <p>Нажми кнопку, чтобы авторизоваться</p>
+  <p>Нажмите кнопку, чтобы авторизоваться</p>
   <button id="authBtn">Получить доступ</button>
 
   <script>
-    // Проверяем, что Telegram WebApp доступен
-    const tg = window.Telegram.WebApp;
+    // Проверяем, что мы в Telegram
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+      const btn = document.getElementById("authBtn");
 
-    const btn = document.getElementById('authBtn');
-    btn.addEventListener('click', () => {
-      // Отправляем Telegram-боту tgWebAppData
-      tg.sendData(tg.initData);
-      btn.innerText = "✅ Данные отправлены!";
-      btn.disabled = true;
-    });
+      btn.addEventListener("click", () => {
+        // Отправляем данные боту
+        tg.sendData(tg.initData); // initData содержит Authorization
+        btn.innerText = "✅ Данные отправлены!";
+        btn.disabled = true;
+      });
+    } else {
+      document.body.innerHTML = "<p>❌ Откройте эту страницу внутри Telegram.</p>";
+    }
   </script>
 </body>
 </html>
