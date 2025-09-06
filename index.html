@@ -5,30 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авторизация Portals</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    button { padding: 15px 30px; font-size: 18px; cursor: pointer; }
+    body { font-family: Arial; text-align:center; padding:50px; }
+    button { padding:15px 30px; font-size:18px; cursor:pointer; }
   </style>
 </head>
 <body>
-  <h1>Авторизация Portals</h1>
-  <p>Нажмите кнопку, чтобы авторизоваться</p>
-  <button id="authBtn">Получить доступ</button>
+<h1>Авторизация Portals</h1>
+<p>Нажми кнопку, чтобы авторизоваться</p>
+<button id="authBtn">Получить доступ</button>
 
-  <script>
-    // Проверяем, что мы в Telegram
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      const btn = document.getElementById("authBtn");
+<script>
+  const btn = document.getElementById("authBtn");
 
-      btn.addEventListener("click", () => {
-        // Отправляем данные боту
-        tg.sendData(tg.initData); // initData содержит Authorization
-        btn.innerText = "✅ Данные отправлены!";
-        btn.disabled = true;
-      });
-    } else {
-      document.body.innerHTML = "<p>❌ Откройте эту страницу внутри Telegram.</p>";
-    }
-  </script>
+  if (window.Telegram?.WebApp) {
+    const tg = window.Telegram.WebApp;
+    btn.addEventListener("click", () => {
+      tg.sendData(tg.initData); // <- данные уходят боту
+      btn.innerText = "✅ Данные отправлены!";
+      btn.disabled = true;
+    });
+  } else {
+    document.body.innerHTML = "<p>❌ Откройте страницу внутри Telegram!</p>";
+  }
+</script>
 </body>
 </html>
